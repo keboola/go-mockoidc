@@ -26,7 +26,7 @@ type User interface {
 type MockUser struct {
 	Subject           string
 	Email             string
-	EmailVerified     bool
+	EmailVerified     *bool
 	PreferredUsername string
 	Phone             string
 	Address           string
@@ -43,7 +43,7 @@ func DefaultUser() *MockUser {
 		Phone:             "555-987-6543",
 		Address:           "123 Main Street",
 		Groups:            []string{"engineering", "design"},
-		EmailVerified:     true,
+		EmailVerified:     nil,
 	}
 }
 
@@ -76,7 +76,7 @@ func (u *MockUser) Userinfo(scope []string) ([]byte, error) {
 type mockClaims struct {
 	*IDTokenClaims
 	Email             string   `json:"email,omitempty"`
-	EmailVerified     bool     `json:"email_verified,omitempty"`
+	EmailVerified     *bool    `json:"email_verified,omitempty"`
 	PreferredUsername string   `json:"preferred_username,omitempty"`
 	Phone             string   `json:"phone_number,omitempty"`
 	Address           string   `json:"address,omitempty"`
